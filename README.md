@@ -1,4 +1,4 @@
-# Olivettes - Water Level Analysis and Forecasting
+# Statistical Analysis of Herault Dam Levels
 
 ## Description
 Salagou is a desktop Python application for analyzing and forecasting water levels of a reservoir (Salagou or Olivettes Dam). It allows you to:
