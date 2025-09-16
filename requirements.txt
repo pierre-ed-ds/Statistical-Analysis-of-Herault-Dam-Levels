@@ -1,0 +1,5 @@
+pandas>=2.0.0
+matplotlib>=3.7.0
+scipy>=1.10.0
+mplcursors>=0.6
+ttkbootstrap>=1.5.0
