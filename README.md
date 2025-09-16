@@ -54,7 +54,7 @@ Required HSV file: HSV_32.txt (for Olivette) or HSV_34.txt (for Salagou) (contai
 
 ### PyInstaller Option
 ```
-pyinstaller --onefile --noconsole --icon=waterdrop_102608.ico --add-data "data;data" splash.py
+pyinstaller --onefile --noconsole --icon=waterdrop_102608.ico --add-data "data;data" app_sur_tkinter.py
 ```
 
 
