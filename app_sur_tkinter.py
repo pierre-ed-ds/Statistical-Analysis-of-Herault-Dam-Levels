@@ -16,38 +16,6 @@ from interpolation import cote_to_volume, volume_to_cote
 from prep_data import charger_donnees, simuler_salagou
 from prep_graph import tracer_faconnage
 
-class SplashScreen(tk.Toplevel):
-    def __init__(self, root, text="Chargement…"):
-        super().__init__(root)
-        self.root = root
-        self.overrideredirect(True)  # pas de bordure
-
-        # Couleur de fond moderne
-        self.configure(bg="white")
-
-        # Taille et centrage
-        width, height = 500, 250
-        screen_width = self.winfo_screenwidth()
-        screen_height = self.winfo_screenheight()
-        x = (screen_width - width) // 2
-        y = (screen_height - height) // 2
-        self.geometry(f"{width}x{height}+{x}+{y}")
-
-        # Label titre stylé
-        self.label = tk.Label(
-            self, text=text, 
-            font=("Helvetica", 18, "bold"), 
-            fg="black", bg="white"
-        )
-        self.label.pack(pady=40)
-
-        # Barre de progression
-        style = tb.Style()
-        self.progress = tb.Progressbar(
-            self, bootstyle="info-striped", length=300, mode="indeterminate"
-        )
-        self.progress.pack(pady=20)
-        self.progress.start(10)  # vitesse animation
 
 class SalagouApp:
     def __init__(self, root):
@@ -852,37 +820,26 @@ class SalagouApp:
         # Réafficher
         self.afficher_resultats_indicateurs(df)
 
-def on_closing(root):
-    """Fermeture propre de l'application"""
-    try:
-        plt.close('all')   # ferme toutes les figures matplotlib
-    except Exception:
-        pass
-    try:
-        root.destroy()
-    except Exception:
-        pass
+    def on_closing(self):
+        """Fermeture propre de l'application"""
+        try:
+            plt.close('all')   # ferme toutes les figures matplotlib
+        except Exception:
+            pass
+        try:
+            self.root.destroy()
+        except Exception:
+            pass
 
-    # forcer la fin du process (utile avec PyInstaller)
-    os._exit(0)
+
+
 
 def main():
     root = tb.Window(themename='flatly')  # ttkbootstrap
-    root.withdraw()  # cacher la fenêtre principale
-
-    # Afficher splash
-    # gestion de la fermeture
-    root.protocol("WM_DELETE_WINDOW", lambda: on_closing(root))
-    splash = SplashScreen(root, "Chargement des données…")
-
-    # Lancer l'UI principale après 2s
-    root.after(2000, lambda: show_main(root, splash))
+    app = SalagouApp(root)  # initialise l'app
     root.mainloop()
-
-def show_main(root, splash):
-    splash.destroy()
-    root.deiconify()
-    app = SalagouApp(root)
+    
+    
 
 if __name__ == "__main__":
     main()
