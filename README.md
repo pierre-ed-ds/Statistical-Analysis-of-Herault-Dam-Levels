@@ -16,10 +16,13 @@ The application uses **Tkinter** with the **Flatly** theme via **ttkbootstrap**,
 
 ## Main Features
 
-![app Screenshot1](img/pic1data.png) ![app Screenshot1](img/pic2ind.png) 
+<div style="display: flex; gap: 10px;">
+  <img src="img/pic1data.png" alt="app Screenshot1" width="45%">
+  <img src="img/pic2ind.png" alt="app Screenshot2" width="45%">
+</div>
 
 ### CSV Data Loading
-- The CSV must contain a **date** column (or datetime index) and a **COTE** column (water level in mNGF).  
+- The CSV must contain a DATE_RELEVE (date), DEBIT_OUT (en m3/s) (water discharge), EVAPORATION (en m3), VOLUME (en m3), COTE (en m).  
 
 ### Interactive Visualization
 - Matplotlib charts embedded in the Tkinter interface.
@@ -27,13 +30,11 @@ The application uses **Tkinter** with the **Flatly** theme via **ttkbootstrap**,
 - Interactive tooltips showing date, water level, total volume, and usable volume.
 
 ### Level Forecasting
-- Based on historical data and monthly assumptions:
-  - Water discharge (m³/s)
-  - Evaporation (mm/day)
+- Based on historical data and monthly assumptions of water discharge
 - Charts display colored areas corresponding to critical thresholds.
 
 ### Manual Adjustments
-- Allows adjusting the level for a specific date to refine the forecast.
+- Allows adjusting the level for a Evaporation and Entering volume to refine the forecast.
 
 ### Chart Export
 - Export charts as PNG, PDF, or JPEG.
@@ -49,15 +50,11 @@ The application uses **Tkinter** with the **Flatly** theme via **ttkbootstrap**,
 ```bash
 pip install -r requirements.txt
 ```
-Required HSV file: HSV_32.txt (contains the relations COTE ↔ VOLUME ↔ SURFACE)
+Required HSV file: HSV_32.txt (for Olivette) or HSV_34.txt (for Salagou) (contains the relations COTE ↔ VOLUME ↔ SURFACE)
 
 ### PyInstaller Option
 ```
-pyinstaller --onefile --noconsole app_olivettes.py \
---add-data "HSV_32.txt;." \
---add-data "<path_to_python>/Lib/site-packages/matplotlib/mpl-data;matplotlib/mpl-data" \
---hidden-import=matplotlib.backends.backend_pdf
+pyinstaller --onefile --noconsole --icon=waterdrop_102608.ico --add-data "data;data" splash.py
 ```
-Last line is required to download the plots as pdf.
 
 
